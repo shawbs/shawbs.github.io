@@ -3,22 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>归档: 2019/4 | Shawbs</title>
+  <title>小程序picker组件在ios下点击出现崩溃问题 | Shawbs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="shawbs, 个人日记, shawbs的个人日记">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shawbs">
-<meta property="og:url" content="http://yoursite.com/archives/2019/04/index.html">
+  <meta name="description" content="当picker的range是一个长度为3的数组，且使用了数组单项的属性时。必须保证数组的单项必须不为undefined 123456789101112131415161718//xwml&amp;lt;picker             mode=&amp;quot;multiSelector&amp;quot;              range=&amp;quot;&amp;#123;&amp;#123;range&amp;#125;&amp;#125">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小程序picker组件在ios下点击出现崩溃问题">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/hehe/index.html">
 <meta property="og:site_name" content="Shawbs">
-<meta property="og:description" content="shawbs, 个人日记, shawbs的个人日记">
+<meta property="og:description" content="当picker的range是一个长度为3的数组，且使用了数组单项的属性时。必须保证数组的单项必须不为undefined 123456789101112131415161718//xwml&amp;lt;picker             mode=&amp;quot;multiSelector&amp;quot;              range=&amp;quot;&amp;#123;&amp;#123;range&amp;#125;&amp;#125">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-02T09:21:27.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shawbs">
-<meta name="twitter:description" content="shawbs, 个人日记, shawbs的个人日记">
+<meta name="twitter:title" content="小程序picker组件在ios下点击出现崩溃问题">
+<meta name="twitter:description" content="当picker的range是一个长度为3的数组，且使用了数组单项的属性时。必须保证数组的单项必须不为undefined 123456789101112131415161718//xwml&amp;lt;picker             mode=&amp;quot;multiSelector&amp;quot;              range=&amp;quot;&amp;#123;&amp;#123;range&amp;#125;&amp;#125">
   
     <link rel="alternate" href="/atom.xml" title="Shawbs" type="application/atom+xml">
   
@@ -51,7 +52,7 @@
 </html>
 
 
-  <body>
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
   
@@ -102,187 +103,97 @@
             
       <div id="content" class="outer">
         
-          <section id="main">
-  <div class="archives-tags-wrap"><blockquote><span>嗯，目前共计2篇文章</span></blockquote>
-
-
-
-
-
-	<!-- 分页显示 -->
-	
-	
-		
-		
-		  
-		  
-		  <section class="archives-wrap">
-		    <div class="archive-year-wrap">
-		      <h1><a href="/archives/2019" class="archive-year">2019</a></h1>
-		    </div>
-		    <div class="archives">
-		
-		<article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-
-      <a href="/2019/04/18/hello-world/" class="archive-article-date">
-		  <time datetime="2019-04-18T03:39:26.244Z" itemprop="datePublished">4月 18, 2019</time>
-	  </a>
-      
+          <section id="main" style="float:none;"><article id="post-hehe" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
   
     <h1 class="thumb" itemprop="name">
-      <a class="archive-article-title" href="/2019/04/18/hello-world/">Hello World</a>
+      小程序picker组件在ios下点击出现崩溃问题
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/2019/07/02/hehe/" class="article-date">
+	  <time datetime="2019-07-02T09:18:30.443Z" itemprop="datePublished">七月 2, 2019</time>
+	</a>
+
+       
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当picker的range是一个长度为3的数组，且使用了数组单项的属性时。<br>必须保证数组的单项必须不为undefined</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//xwml</span><br><span class="line">&lt;picker </span><br><span class="line">            mode=&quot;multiSelector&quot;  </span><br><span class="line">            range=&quot;&#123;&#123;range&#125;&#125;&quot; </span><br><span class="line">            range-key=&quot;fullname&quot; </span><br><span class="line">            bindcolumnchange=&quot;change&quot;</span><br><span class="line">            bindchange=&quot;setAddressId&quot;</span><br><span class="line">            value=&quot;&#123;&#123;multiIndex&#125;&#125;&quot;</span><br><span class="line">            &gt;</span><br><span class="line">                &#123;&#123;range[0][multiIndex[0]].fullname&#125;&#125;</span><br><span class="line">                &#123;&#123;range[1][multiIndex[1]].fullname&#125;&#125;</span><br><span class="line">                &#123;&#123;range[2][multiIndex[2]].fullname&#125;&#125;</span><br><span class="line">            &lt;/picker&gt;</span><br><span class="line">//js</span><br><span class="line">data:&#123;</span><br><span class="line">    range: [[fullname: &apos;a&apos;, id: 110000],[fullname: &apos;a&apos;, id: 110000],[fullname: &apos;a&apos;, id: 110000]]</span><br><span class="line">     range: [[fullname: &apos;a&apos;, id: 110000],[fullname: &apos;a&apos;, id: 110000],[]] //ios会出现崩溃，解决方法：使用一个占位数值[fullname: &apos;&apos;, id:000000]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-	
-	
-		</div></section>
-	
 
-	<!-- 页数指示器 -->
-	
+<!-- Table of Contents -->
 
-
-
-</div></section>
-          <aside id="sidebar">
-  
-    <div style="margin: 20px 0;">
-	<div id="search-form-wrap">
-
-    <form class="search-form">
-        <label style="width: 72%;">
-            <span class="screen-reader-text">Search for:</span>
-            <input type="search" class="search-field" style="height: 36px; width: 100%;" placeholder=" 搜索…" value name="s" title="Search for:">
-        </label>
-        <input type="submit" class="search-form-submit" value="搜索">
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="请输入关键词...">
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+      <ol class="nav">无</ol>
+    
     </div>
-</div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(无标题)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
-
-</div>
-</div>
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">联系我们</h3>
-    <div class="widget widget_athemes_social_icons">
-
-    	<ul class="clearfix widget-social-icons">   
-    	
-   			<li><a href="https://github.com/shawbs" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a></li> 
-
-   		
-   			<li><a href title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a></li> 
-
-   		
-   		</ul>
-
-
-   		<!--
-   		<ul class="clearfix widget-social-icons">   		
-   		<li class="widget-si-twitter"><a href="http://twitter.com" title="Twitter"><i class="ico-twitter"></i></a></li> 
-		<li class="widget-si-facebook"><a href="http://facebook.com" title="Facebook"><i class="ico-facebook"></i></a></li>
-			<li class="widget-si-gplus"><a href="http://plus.google.com" title="Google+"><i class="ico-gplus"></i></a></li>
-			<li class="widget-si-pinterest"><a href="http://pinterest.com" title="Pinterest"><i class="ico-pinterest"></i></a></li>
-			<li class="widget-si-flickr"><a href="http://flickr.com" title="Flickr"><i class="ico-flickr"></i></a></li>
-			<li class="widget-si-instagram"><a href="http://instagram.com" title="Instagram"><i class="ico-instagram"></i></a></li>
-		</ul> -->
-
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget_athemes_tabs">
-    <ul id="widget-tab" class="clearfix widget-tab-nav">
-      <li class="active"><a>最新文章</a></li>
-    </ul>
-    <div class="widget">
-      <ul>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/07/02/hehe/">小程序picker组件在ios下点击出现崩溃问题</a></h6>
-              <span>七月 2, 2019</span>
-            </div>
-
-          </li>
-        
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/2019/04/18/hello-world/">Hello World</a></h6>
-              <span>四月 18, 2019</span>
-            </div>
-
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-</aside>
+  </aside>
+</section>
         
       </div>
 
