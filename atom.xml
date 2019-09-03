@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Shawbs</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://shawbs.github.io/"/>
+  <updated>2019-09-03T04:08:48.246Z</updated>
+  <id>https://shawbs.github.io/</id>
+  
+  <author>
+    <name>shawbs</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>小程序的picker使用问题</title>
+    <link href="https://shawbs.github.io/2019/09/03/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84picker%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98/"/>
+    <id>https://shawbs.github.io/2019/09/03/小程序的picker使用问题/</id>
+    <published>2019-09-03T04:08:24.000Z</published>
+    <updated>2019-09-03T04:08:48.246Z</updated>
+    
+    <content type="html"><![CDATA[<p>当picker的range是一个长度为3的数组，且使用了数组单项的属性时。<br>必须保证数组的单项必须不为undefined</p><pre><code>//xwml&lt;picker             mode=&quot;multiSelector&quot;              range=&quot;{{range}}&quot;             range-key=&quot;fullname&quot;             bindcolumnchange=&quot;change&quot;            bindchange=&quot;setAddressId&quot;            value=&quot;{{multiIndex}}&quot;            &gt;                {{range[0][multiIndex[0]].fullname}}                {{range[1][multiIndex[1]].fullname}}                {{range[2][multiIndex[2]].fullname}}            &lt;/picker&gt;//jsdata:{    range: [[fullname: &#39;a&#39;, id: 110000],[fullname: &#39;a&#39;, id: 110000],[fullname: &#39;a&#39;, id: 110000]]     range: [[fullname: &#39;a&#39;, id: 110000],[fullname: &#39;a&#39;, id: 110000],[]] //ios会出现崩溃，解决方法：使用一个占位数值[fullname: &#39;&#39;, id:000000]}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;当picker的range是一个长度为3的数组，且使用了数组单项的属性时。&lt;br&gt;必须保证数组的单项必须不为undefined&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//xwml
+&amp;lt;picker 
+            mode=&amp;quot;multiSelector&amp;qu
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://shawbs.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="小程序" scheme="https://shawbs.github.io/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+    
+  </entry>
+  
+</feed>
