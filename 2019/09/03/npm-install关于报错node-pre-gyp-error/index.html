@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Shawbs</title>
-  <meta name="keywords" content>
-  <meta name="description" content="Shawbs">
+  <title>npm install关于报错node-pre-gyp error | Shawbs</title>
+  <meta name="keywords" content=" npm , node ">
+  <meta name="description" content="npm install关于报错node-pre-gyp error | Shawbs">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="联系方式 xxw.show@qq.com">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg">
@@ -241,12 +241,70 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-npm-install关于报错node-pre-gyp-error" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">npm install关于报错node-pre-gyp error</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="前端">前端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color4">npm</a>
+            
+            <a href="javascript:" class="color5">node</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-09-03 12:28:44">2019-09-03 12:26</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:67</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
     
 <style>
     .left-col .switch-btn,
@@ -259,13 +317,37 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><hr>
-<p>写博客主要是对以往的知识点进行梳理和应对日益老化的记忆做出的补偿措施</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/">Hexo</a> 生成，部署在 <a href="https://pages.github.com/">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在stackoverflow上看到一个解决方法：</p>
+<pre><code> # before installing node-gyp on windows
+npm install --global --production windows-build-tools
 
-        </article>
-        
-        
+# install node-gyp globally
+npm install -g node-gyp
+</code></pre><p>不过后面并没有等到解决，卡在第一步，最终我把node的版本回滚到7.6.0，然后成功了。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 xxx.show@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>npm install关于报错node-pre-gyp error</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">67</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="shawbs">shawbs</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-09-03, 12:26:16</p>
+    <p><span class="copy-title">最后更新:</span>2019-09-03, 12:28:44</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/03/npm-install关于报错node-pre-gyp-error/" title="npm install关于报错node-pre-gyp error">https://shawbs.github.io/2019/09/03/npm-install关于报错node-pre-gyp-error/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -285,6 +367,13 @@
         gitalk.render('comments')
     })
 </script>
+
+
+
+
+    
+
+
 
 
     </div>

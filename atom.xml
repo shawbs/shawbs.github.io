@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shawbs.github.io/"/>
-  <updated>2019-09-03T04:08:48.246Z</updated>
+  <updated>2019-09-03T04:30:57.534Z</updated>
   <id>https://shawbs.github.io/</id>
   
   <author>
@@ -15,6 +15,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ecs服务器配置全过程</title>
+    <link href="https://shawbs.github.io/2019/09/03/ecs%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E5%85%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>https://shawbs.github.io/2019/09/03/ecs服务器配置全过程/</id>
+    <published>2019-09-03T04:30:14.000Z</published>
+    <updated>2019-09-03T04:30:57.534Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h2><p><strong>阿里云购买服务器ecs实例</strong></p><p><strong>添加安全组</strong></p><ol><li>ICMP规则（ping公网IP）</li><li>22端口开放（也可以修改默认22端口，开放其它端口，这里主要是为了ssh远程连接）</li></ol><p><strong>ps: 建议修改默认端口,以下是修改方法</strong></p><ul><li><p>编辑ssh配置文件</p><pre><code>vim /etc/ssh/sshd_config</code></pre></li><li><p>添加以下</p><pre><code class="vim">Port 22Prot 你的端口</code></pre></li><li><p>开放你的端口，运行以下</p><pre><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 你的端口 -j ACCEPT</code></pre></li><li><p>重启ssh,iptables（centos7.6重启指令是什么，我也不知道，我是直接在阿里控制台，直接重启的服务器）</p></li></ul><h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>MAC下使用iterm，编写一个.sh文件，输入以下内容</p><pre><code class="vim">#!/usr/bin/expect -f  set port 2121  set user root  set host ***  set password ***  set timeout -1  spawn ssh -p$port $user@$host  expect &quot;*assword:*&quot;  send &quot;$password\r&quot;  interact  expect eof</code></pre><p><strong>配置以下</strong><br>item-&gt;Preferences-&gt;Profiles添加一个启动shell，<br><img src="evernotecid://044F3B62-01EE-4F02-9F36-039F03887CFC/appyinxiangcom/23067813/ENResource/p1" alt="eaa765eddd563c74c68385460f578576.png"></p><p><strong>连接</strong></p><ul><li>指令<pre><code>ssh -p端口 root@ip</code></pre></li><li>快捷: 使用图片中的快捷键(Shortcut key项)<code>command</code>+<code>control</code>+<code>1</code></li></ul><h2 id="搭建服务器环境"><a href="#搭建服务器环境" class="headerlink" title="搭建服务器环境"></a>搭建服务器环境</h2><h3 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h3><pre><code>wget http://nginx.org/download/nginx-1.13.7.tar.gztar zxvf nginx-1.13.7.tar.gzcd /usr/nginx/nginx-1.13.7make &amp;&amp; make installcd /usr/nginx/sbin./nginx -s reload</code></pre><p><strong>开放80防火墙</strong></p><pre><code>iptables -I INPUT -p tcp --dport 80 -j ACCEPT/etc/init.d/iptables save/etc/init.d/iptables restart</code></pre><p><strong>测试安装效果</strong></p><pre><code>curl http://localhost</code></pre><p><strong>安装mysql(5.7.25)</strong></p><pre><code>wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpmyum -y install mysql57-community-release-el7-10.noarch.rpmyum -y install mysql-community-server</code></pre><p><strong>修改默认密码</strong></p><pre><code>set password for root@localhost = password(&#39;123456&#39;);//出现Your password does not satisfy the current policy requirements，执行以下指令set global validate_password_policy=0;set global validate_password_length=1;set global validate_password_mixed_case_count=2;</code></pre><p><strong>创建用户</strong> <a href="https://www.cnblogs.com/sos-blue/p/6852945.html" target="_blank" rel="noopener">参考</a></p><pre><code>CREATE USER &#39;username&#39;@&#39;localhost&#39; IDENTIFIED BY &quot;password&quot;;</code></pre><p>示例</p><pre><code>CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#39;192.168.1.101_&#39; IDENDIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;;CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;&#39;;CREATE USER &#39;pig&#39;@&#39;%&#39;;</code></pre><p><em>说明</em>：</p><ul><li>username是你分创建的用户名</li><li>localhost是你希望能连接该数据库的主机,(localhost只允许本机，ip被允许的具体IP，%允许所有主机)</li><li>password是用户密码</li></ul><p><strong>授权</strong></p><pre><code>GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;</code></pre><p>示例</p><pre><code>GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;GRANT ALL ON maindataplus.* TO &#39;pig&#39;@&#39;%&#39;;</code></pre><p><em>说明</em>：</p><ul><li>privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL</li><li>databasename：数据库名</li><li>tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用<em>表示，如</em>.*</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;初步&quot;&gt;&lt;a href=&quot;#初步&quot; class=&quot;headerlink&quot; title=&quot;初步&quot;&gt;&lt;/a&gt;初步&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;阿里云购买服务器ecs实例&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;添加安全组&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="运维" scheme="https://shawbs.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+      <category term="linux" scheme="https://shawbs.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux系统 unzip解压出现中文乱码问题</title>
+    <link href="https://shawbs.github.io/2019/09/03/linux%E7%B3%BB%E7%BB%9F-unzip%E8%A7%A3%E5%8E%8B%E5%87%BA%E7%8E%B0%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/"/>
+    <id>https://shawbs.github.io/2019/09/03/linux系统-unzip解压出现中文乱码问题/</id>
+    <published>2019-09-03T04:28:08.000Z</published>
+    <updated>2019-09-03T04:31:04.073Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用指令：</p><blockquote><p>unzip -O cp936 xxx.zip</p></blockquote><p>但是，有些发行版所带的 unzip 没有这个参数，比如 ArchLinux 就需要安装 unzip-iconv。</p><p>Ubuntu 12.04 里面的 unzip 是有这个参数的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;使用指令：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;unzip -O cp936 xxx.zip&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但是，有些发行版所带的 unzip 没有这个参数，比如 ArchLinux 就需要安装 unzip-iconv。&lt;/p&gt;
+&lt;p&gt;Ubu
+      
+    
+    </summary>
+    
+    
+      <category term="运维" scheme="https://shawbs.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+      <category term="linux" scheme="https://shawbs.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>npm install关于报错node-pre-gyp error</title>
+    <link href="https://shawbs.github.io/2019/09/03/npm-install%E5%85%B3%E4%BA%8E%E6%8A%A5%E9%94%99node-pre-gyp-error/"/>
+    <id>https://shawbs.github.io/2019/09/03/npm-install关于报错node-pre-gyp-error/</id>
+    <published>2019-09-03T04:26:16.000Z</published>
+    <updated>2019-09-03T04:28:44.526Z</updated>
+    
+    <content type="html"><![CDATA[<p>在stackoverflow上看到一个解决方法：</p><pre><code> # before installing node-gyp on windowsnpm install --global --production windows-build-tools# install node-gyp globallynpm install -g node-gyp</code></pre><p>不过后面并没有等到解决，卡在第一步，最终我把node的版本回滚到7.6.0，然后成功了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在stackoverflow上看到一个解决方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; # before installing node-gyp on windows
+npm install --global --production windows-build-tools
+
+#
+      
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="https://shawbs.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="npm" scheme="https://shawbs.github.io/tags/npm/"/>
+    
+      <category term="node" scheme="https://shawbs.github.io/tags/node/"/>
+    
+  </entry>
   
   <entry>
     <title>小程序的picker使用问题</title>

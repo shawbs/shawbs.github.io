@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
-  <title>Shawbs</title>
-  <meta name="keywords" content>
-  <meta name="description" content="Shawbs">
+  <title>ecs服务器配置全过程 | Shawbs</title>
+  <meta name="keywords" content=" linux ">
+  <meta name="description" content="ecs服务器配置全过程 | Shawbs">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="联系方式 xxw.show@qq.com">
 <meta property="og:type" content="website">
@@ -52,7 +52,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg">
@@ -241,12 +241,68 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-ecs服务器配置全过程" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">ecs服务器配置全过程</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a href="javascript:" data-rel="运维">运维</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="javascript:" class="color1">linux</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title="更新时间: 2019-09-03 12:30:57">2019-09-03 12:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:664</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初步"><span class="toc-text">初步</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#连接服务器"><span class="toc-text">连接服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建服务器环境"><span class="toc-text">搭建服务器环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装nginx"><span class="toc-text">安装nginx</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -259,13 +315,123 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><hr>
-<p>写博客主要是对以往的知识点进行梳理和应对日益老化的记忆做出的补偿措施</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/">Hexo</a> 生成，部署在 <a href="https://pages.github.com/">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="初步"><a href="#初步" class="headerlink" title="初步"></a>初步</h2><p><strong>阿里云购买服务器ecs实例</strong></p>
+<p><strong>添加安全组</strong></p>
+<ol>
+<li>ICMP规则（ping公网IP）</li>
+<li>22端口开放（也可以修改默认22端口，开放其它端口，这里主要是为了ssh远程连接）</li>
+</ol>
+<p><strong>ps: 建议修改默认端口,以下是修改方法</strong></p>
+<ul>
+<li><p>编辑ssh配置文件</p>
+<pre><code>vim /etc/ssh/sshd_config
+</code></pre></li>
+<li><p>添加以下</p>
+<pre><code class="vim">Port 22
+Prot 你的端口
+</code></pre>
+</li>
+<li><p>开放你的端口，运行以下</p>
+<pre><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 你的端口 -j ACCEPT
+</code></pre></li>
+<li><p>重启ssh,iptables（centos7.6重启指令是什么，我也不知道，我是直接在阿里控制台，直接重启的服务器）</p>
+</li>
+</ul>
+<h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>MAC下使用iterm，编写一个.sh文件，输入以下内容</p>
+<pre><code class="vim">#!/usr/bin/expect -f
+  set port 2121
+  set user root
+  set host ***
+  set password ***
+  set timeout -1
 
-        </article>
-        
-        
+  spawn ssh -p$port $user@$host
+  expect &quot;*assword:*&quot;
+  send &quot;$password\r&quot;
+  interact
+  expect eof
+</code></pre>
+<p><strong>配置以下</strong><br>item-&gt;Preferences-&gt;Profiles添加一个启动shell，<br><img src="evernotecid://044F3B62-01EE-4F02-9F36-039F03887CFC/appyinxiangcom/23067813/ENResource/p1" alt="eaa765eddd563c74c68385460f578576.png"></p>
+<p><strong>连接</strong></p>
+<ul>
+<li>指令<pre><code>ssh -p端口 root@ip
+</code></pre></li>
+<li>快捷: 使用图片中的快捷键(Shortcut key项)<code>command</code>+<code>control</code>+<code>1</code></li>
+</ul>
+<h2 id="搭建服务器环境"><a href="#搭建服务器环境" class="headerlink" title="搭建服务器环境"></a>搭建服务器环境</h2><h3 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h3><pre><code>wget http://nginx.org/download/nginx-1.13.7.tar.gz
+tar zxvf nginx-1.13.7.tar.gz
+cd /usr/nginx/nginx-1.13.7
+
+make &amp;&amp; make install
+cd /usr/nginx/sbin
+./nginx -s reload
+</code></pre><p><strong>开放80防火墙</strong></p>
+<pre><code>iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+/etc/init.d/iptables save
+/etc/init.d/iptables restart
+</code></pre><p><strong>测试安装效果</strong></p>
+<pre><code>curl http://localhost
+</code></pre><p><strong>安装mysql(5.7.25)</strong></p>
+<pre><code>wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql57-community-release-el7-10.noarch.rpm
+yum -y install mysql-community-server
+</code></pre><p><strong>修改默认密码</strong></p>
+<pre><code>set password for root@localhost = password(&#39;123456&#39;);
+
+//出现Your password does not satisfy the current policy requirements，执行以下指令
+set global validate_password_policy=0;
+set global validate_password_length=1;
+set global validate_password_mixed_case_count=2;
+</code></pre><p><strong>创建用户</strong> <a href="https://www.cnblogs.com/sos-blue/p/6852945.html" target="_blank" rel="noopener">参考</a></p>
+<pre><code>CREATE USER &#39;username&#39;@&#39;localhost&#39; IDENTIFIED BY &quot;password&quot;;
+</code></pre><p>示例</p>
+<pre><code>CREATE USER &#39;dog&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;
+CREATE USER &#39;pig&#39;@&#39;192.168.1.101_&#39; IDENDIFIED BY &#39;123456&#39;;
+CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;123456&#39;;
+CREATE USER &#39;pig&#39;@&#39;%&#39; IDENTIFIED BY &#39;&#39;;
+CREATE USER &#39;pig&#39;@&#39;%&#39;;
+</code></pre><p><em>说明</em>：</p>
+<ul>
+<li>username是你分创建的用户名</li>
+<li>localhost是你希望能连接该数据库的主机,(localhost只允许本机，ip被允许的具体IP，%允许所有主机)</li>
+<li>password是用户密码</li>
+</ul>
+<p><strong>授权</strong></p>
+<pre><code>GRANT privileges ON databasename.tablename TO &#39;username&#39;@&#39;host&#39;
+</code></pre><p>示例</p>
+<pre><code>GRANT SELECT, INSERT ON test.user TO &#39;pig&#39;@&#39;%&#39;;
+GRANT ALL ON *.* TO &#39;pig&#39;@&#39;%&#39;;
+GRANT ALL ON maindataplus.* TO &#39;pig&#39;@&#39;%&#39;;
+</code></pre><p><em>说明</em>：</p>
+<ul>
+<li>privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL</li>
+<li>databasename：数据库名</li>
+<li>tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用<em>表示，如</em>.*</li>
+</ul>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 xxx.show@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>ecs服务器配置全过程</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">664</span></p>
+    <p><span class="copy-title">本文作者:</span><a href="javascript:void(0)" title="shawbs">shawbs</a></p>
+    <p><span class="copy-title">发布时间:</span>2019-09-03, 12:30:14</p>
+    <p><span class="copy-title">最后更新:</span>2019-09-03, 12:30:57</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/09/03/ecs服务器配置全过程/" title="ecs服务器配置全过程">https://shawbs.github.io/2019/09/03/ecs服务器配置全过程/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -285,6 +451,13 @@
         gitalk.render('comments')
     })
 </script>
+
+
+
+
+    
+
+
 
 
     </div>
