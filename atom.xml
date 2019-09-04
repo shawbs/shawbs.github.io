@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://shawbs.github.io/"/>
-  <updated>2019-09-03T04:30:57.534Z</updated>
+  <updated>2019-09-04T07:01:45.084Z</updated>
   <id>https://shawbs.github.io/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react-native run-android react-nativ :app:processDebugResources failed</title>
+    <link href="https://shawbs.github.io/2019/09/04/react-native-run-android-react-nativ-app-processDebugResources-failed/"/>
+    <id>https://shawbs.github.io/2019/09/04/react-native-run-android-react-nativ-app-processDebugResources-failed/</id>
+    <published>2019-09-04T07:01:34.000Z</published>
+    <updated>2019-09-04T07:01:45.084Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题如题，解决方法"><a href="#问题如题，解决方法" class="headerlink" title="问题如题，解决方法"></a>问题如题，解决方法</h3><blockquote><p>cd android<br>gradlew clean</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;问题如题，解决方法&quot;&gt;&lt;a href=&quot;#问题如题，解决方法&quot; class=&quot;headerlink&quot; title=&quot;问题如题，解决方法&quot;&gt;&lt;/a&gt;问题如题，解决方法&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;cd android&lt;br&gt;gradlew clean&lt;/
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>node使用密码连接mysql数据库报错解决方法</title>
+    <link href="https://shawbs.github.io/2019/09/04/node%E4%BD%BF%E7%94%A8%E5%AF%86%E7%A0%81%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>https://shawbs.github.io/2019/09/04/node使用密码连接mysql数据库报错解决方法/</id>
+    <published>2019-09-04T07:00:29.000Z</published>
+    <updated>2019-09-04T07:00:55.571Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="报错：-ER-ACCESS-DENIED-ERROR-Access-denied-for-user-‘root‘-’localhost’-using-password-YES"><a href="#报错：-ER-ACCESS-DENIED-ERROR-Access-denied-for-user-‘root‘-’localhost’-using-password-YES" class="headerlink" title="报错： ER_ACCESS_DENIED_ERROR: Access denied for user ‘root‘@’localhost’ (using password: YES)"></a>报错： ER_ACCESS_DENIED_ERROR: Access denied for user ‘root‘@’localhost’ (using password: YES)</h4><p>（ps:吐槽一下百度到的各种解决方式：写的一大堆文字，根本解决不了问题）</p><ul><li><p>打开mysql根目录下 my.ini文件<br>加上：<br> skip-grant-tables </p></li><li><p>重启mysql服务<br>end</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;报错：-ER-ACCESS-DENIED-ERROR-Access-denied-for-user-‘root‘-’localhost’-using-password-YES&quot;&gt;&lt;a href=&quot;#报错：-ER-ACCESS-DENIED-ERROR-Access
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>ecs服务器配置全过程</title>
